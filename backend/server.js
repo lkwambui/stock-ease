@@ -10,6 +10,7 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const supplierRoutes = require('./routes/supplierRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const mpesaRoutes     = require('./routes/mpesaRoutes');
 const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 
 const app = express();
@@ -25,6 +26,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/suppliers', supplierRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/payments', mpesaRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
