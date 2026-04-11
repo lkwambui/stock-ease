@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Plus, Eye, CheckCircle, XCircle, Trash2 } from 'lucide-react';
+import { Plus, Eye, CheckCircle, XCircle, Trash2, CreditCard } from 'lucide-react';
 import Layout from '../components/Layout';
 import Modal from '../components/Modal';
+import PaymentModal from '../components/PaymentModal';
 import { orderService } from '../services/orderService';
 import { productService } from '../services/productService';
 import { useAuth } from '../context/AuthContext';
 
 const statusBadge = (status) => {
   const map = {
-    Pending: 'badge-pending',
+    Pending:   'badge-pending',
     Completed: 'badge-completed',
     Cancelled: 'badge-cancelled',
+    Paid:      'badge-paid',
   };
   return map[status] || 'badge-pending';
 };
@@ -33,6 +35,9 @@ const Orders = () => {
 
   // View order modal
   const [viewOrder, setViewOrder] = useState(null);
+
+  // Payment modal
+  const [payOrder, setPayOrder] = useState(null);
 
   const fetchOrders = async () => {
     try {
@@ -133,7 +138,7 @@ const Orders = () => {
       {/* Filter */}
       <div className="card mb-6">
         <div className="flex gap-3 flex-wrap">
-          {['', 'Pending', 'Completed', 'Cancelled'].map((s) => (
+          {['', 'Pending', 'Completed', 'Cancelled', 'Paid'].map((s) => (
             <button
               key={s}
               onClick={() => setStatusFilter(s)}
@@ -227,6 +232,13 @@ const Orders = () => {
                         </button>
                         {order.status === 'Pending' && (
                           <>
+                            {/* Pay Now — triggers M-Pesa STK Push */}
+                            <button
+                              onClick={() => setPayOrder(order)}
+                              className="flex items-center gap-1 text-emerald-600 hover:text-emerald-800 text-xs font-medium"
+                            >
+                              <CreditCard size={13} /> Pay
+                            </button>
                             <button
                               onClick={() =>
                                 handleStatusChange(order._id, 'Completed')
@@ -360,6 +372,17 @@ const Orders = () => {
           </div>
         </form>
       </Modal>
+
+      {/* M-Pesa Payment Modal */}
+      <PaymentModal
+        isOpen={!!payOrder}
+        onClose={() => setPayOrder(null)}
+        order={payOrder}
+        onPaymentSuccess={() => {
+          setPayOrder(null);
+          fetchOrders();
+        }}
+      />
 
       {/* View Order Modal */}
       <Modal
