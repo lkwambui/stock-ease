@@ -6,6 +6,24 @@ import { productService } from '../services/productService';
 import { supplierService } from '../services/supplierService';
 import { useAuth } from '../context/AuthContext';
 
+// Default category suggestions — shown even on a fresh database.
+// Any new category typed by the user automatically appears in future sessions
+// once products with that category are fetched.
+const DEFAULT_CATEGORIES = [
+  'Electronics',
+  'Apparel',
+  'Footwear',
+  'Accessories',
+  'Furniture',
+  'Office Supplies',
+  'Food & Beverages',
+  'Health & Beauty',
+  'Sports & Outdoors',
+  'Toys & Games',
+  'Books & Stationery',
+  'Other',
+];
+
 const EMPTY_FORM = {
   name: '',
   category: '',
@@ -243,7 +261,7 @@ const Products = () => {
                     </td>
                     <td className="px-5 py-3 text-gray-600">{p.category}</td>
                     <td className="px-5 py-3 text-gray-700">
-                      KShs {Math.round(p.price).toLocaleString()}
+                      Ksh {Math.round(p.price).toLocaleString()}
                     </td>
                     <td className="px-5 py-3 text-gray-700">{p.quantity}</td>
                     <td className="px-5 py-3 text-gray-600">
@@ -314,19 +332,33 @@ const Products = () => {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Category *
               </label>
+              {/* datalist = dropdown of suggestions + free-text entry */}
               <input
                 type="text"
                 name="category"
+                list="category-options"
                 value={form.category}
                 onChange={handleFormChange}
                 className="input-field"
-                placeholder="e.g. Electronics"
+                placeholder="Select or type a category..."
+                autoComplete="off"
                 required
               />
+              <datalist id="category-options">
+                {/* Merge default suggestions with categories from existing products */}
+                {[
+                  ...new Set([
+                    ...DEFAULT_CATEGORIES,
+                    ...categories,
+                  ]),
+                ].map((c) => (
+                  <option key={c} value={c} />
+                ))}
+              </datalist>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Price ($) *
+                Price *
               </label>
               <input
                 type="number"

@@ -97,7 +97,7 @@ const Dashboard = () => {
         />
         <StatsCard
           title="Revenue"
-          value={`KShs ${Math.round(stats.totalRevenue).toLocaleString()}`}
+          value={`Ksh ${Math.round(stats.totalRevenue).toLocaleString()}`}
           icon={DollarSign}
           color="green"
           subtitle="From completed orders"
@@ -228,7 +228,7 @@ const Dashboard = () => {
                       {order.status}
                     </span>
                     <p className="text-xs text-gray-500 mt-1">
-                      KShs {Math.round(order.totalAmount).toLocaleString()}
+                      Ksh {Math.round(order.totalAmount).toLocaleString()}
                     </p>
                   </div>
                 </div>

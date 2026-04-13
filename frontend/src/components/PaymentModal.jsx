@@ -135,7 +135,7 @@ const PaymentModal = ({ isOpen, onClose, order, onPaymentSuccess }) => {
         </p>
         <p className="text-gray-800 font-semibold">{order?.orderNumber}</p>
         <p className="text-blue-700 text-lg font-bold">
-          KShs {Math.round(order?.totalAmount || 0).toLocaleString()}
+          Ksh {Math.round(order?.totalAmount || 0).toLocaleString()}
         </p>
       </div>
 
@@ -216,7 +216,7 @@ const PaymentModal = ({ isOpen, onClose, order, onPaymentSuccess }) => {
       <p className="text-gray-800 font-bold text-xl">Payment Successful!</p>
       <div className="bg-green-50 border border-green-200 rounded-xl px-5 py-3 space-y-1 text-sm">
         <p className="text-gray-500">Order: <span className="font-semibold text-gray-700">{order?.orderNumber}</span></p>
-        <p className="text-gray-500">Amount: <span className="font-semibold text-green-700">KShs {Math.round(order?.totalAmount || 0).toLocaleString()}</span></p>
+        <p className="text-gray-500">Amount: <span className="font-semibold text-green-700">Ksh {Math.round(order?.totalAmount || 0).toLocaleString()}</span></p>
         {receipt && (
           <p className="text-gray-500">Receipt: <span className="font-semibold text-gray-700">{receipt}</span></p>
         )}

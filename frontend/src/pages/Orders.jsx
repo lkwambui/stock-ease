@@ -209,7 +209,7 @@ const Orders = () => {
                       {order.items.length} item(s)
                     </td>
                     <td className="px-5 py-3 text-gray-700">
-                      KShs {Math.round(order.totalAmount).toLocaleString()}
+                      Ksh {Math.round(order.totalAmount).toLocaleString()}
                     </td>
                     <td className="px-5 py-3">
                       <span className={statusBadge(order.status)}>
@@ -305,7 +305,7 @@ const Orders = () => {
                     <option value="">Select product...</option>
                     {products.map((p) => (
                       <option key={p._id} value={p._id}>
-                        {p.name} (KShs {Math.round(p.price).toLocaleString()} · {p.quantity} in stock)
+                        {p.name} (Ksh {Math.round(p.price).toLocaleString()} · {p.quantity} in stock)
                       </option>
                     ))}
                   </select>
@@ -342,7 +342,7 @@ const Orders = () => {
 
           {previewTotal > 0 && (
             <div className="bg-blue-50 px-4 py-2 rounded-lg text-sm text-blue-700 font-medium">
-              Estimated Total: KShs {Math.round(previewTotal).toLocaleString()}
+              Estimated Total: Ksh {Math.round(previewTotal).toLocaleString()}
             </div>
           )}
 
@@ -401,7 +401,7 @@ const Orders = () => {
               </div>
               <div>
                 <p className="text-gray-500">Total Amount</p>
-                <p className="font-semibold">KShs {Math.round(viewOrder.totalAmount).toLocaleString()}</p>
+                <p className="font-semibold">Ksh {Math.round(viewOrder.totalAmount).toLocaleString()}</p>
               </div>
               <div>
                 <p className="text-gray-500">Created By</p>
@@ -437,9 +437,9 @@ const Orders = () => {
                     <tr key={i} className="border-t">
                       <td className="px-3 py-2">{item.productName}</td>
                       <td className="px-3 py-2">{item.quantity}</td>
-                      <td className="px-3 py-2">KShs {Math.round(item.price).toLocaleString()}</td>
+                      <td className="px-3 py-2">Ksh {Math.round(item.price).toLocaleString()}</td>
                       <td className="px-3 py-2 font-medium">
-                        KShs {Math.round(item.price * item.quantity).toLocaleString()}
+                        Ksh {Math.round(item.price * item.quantity).toLocaleString()}
                       </td>
                     </tr>
                   ))}
