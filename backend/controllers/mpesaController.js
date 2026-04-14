@@ -146,9 +146,9 @@ const mpesaCallback = async (req, res) => {
       payment.mpesaReceiptNumber = mpesaReceiptNumber;
       await payment.save();
 
-      // Update the linked order status → "Paid"
-      await Order.findByIdAndUpdate(payment.orderId, { status: 'Paid' });
-      console.log(`[Callback] Order ${payment.orderId} marked as Paid`);
+      // Update the linked order status → "Completed"
+      await Order.findByIdAndUpdate(payment.orderId, { status: 'Completed' });
+      console.log(`[Callback] Order ${payment.orderId} marked as Completed`);
 
     } else {
       // ────────────────────────────────

@@ -139,15 +139,15 @@ const Dashboard = () => {
             Order Distribution
           </h2>
           {orderStatusData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={220}>
+            <ResponsiveContainer width="100%" height={280}>
               <PieChart>
                 <Pie
                   data={orderStatusData}
                   dataKey="count"
                   nameKey="name"
                   cx="50%"
-                  cy="50%"
-                  outerRadius={80}
+                  cy="45%"
+                  outerRadius={85}
                   label={({ name, percent }) =>
                     `${name} ${(percent * 100).toFixed(0)}%`
                   }
