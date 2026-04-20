@@ -18,6 +18,7 @@ A full-stack MERN web application for managing inventory, orders, and suppliers 
 
 ---
 
+
 ## Features
 
 - **Authentication** — Register/Login with JWT, role-based access (Admin / Employee)
@@ -26,6 +27,27 @@ A full-stack MERN web application for managing inventory, orders, and suppliers 
 - **Order Management** — Create orders, auto-deduct stock, update status (Pending / Completed / Cancelled)
 - **Supplier Management** — Store and manage supplier contact information
 - **Dashboard** — Stats cards + bar chart + pie chart + recent activity
+- **Mpesa Payments** — Accept and track payments via Mpesa mobile money integration
+---
+
+### 8. Mpesa Payment Integration
+
+StockEase integrates with Mpesa to enable secure mobile money payments for orders. This allows businesses and customers to pay directly via Mpesa, and payments are automatically tracked in the system.
+
+- **Initiate Payment:** Users can initiate an Mpesa payment for an order from the Orders page.
+- **Payment Status Tracking:** The system updates payment status in real time and records transaction details.
+- **Mpesa Callback Handling:** The backend securely handles Mpesa callbacks to confirm payments.
+- **Payment History:** All Mpesa transactions are viewable in the admin dashboard or payment section.
+
+#### Mpesa API Endpoints
+
+| Method | Endpoint                | Description                       |
+|--------|-------------------------|-----------------------------------|
+| POST   | /api/mpesa/stk-push     | Initiate Mpesa STK Push payment   |
+| POST   | /api/mpesa/callback     | Mpesa payment confirmation (auto) |
+| GET    | /api/payments           | List all Mpesa payments           |
+
+**Note:** Mpesa integration uses Safaricom's Daraja API. All sensitive keys are stored in environment variables. See `backend/config/mpesaConfig.js` for setup details.
 
 ---
 
@@ -208,6 +230,7 @@ The app will be available at **http://localhost:3000**
 ---
 
 ## 🔑 API Endpoints
+
 
 ### Auth
 | Method | Endpoint             | Description        |
